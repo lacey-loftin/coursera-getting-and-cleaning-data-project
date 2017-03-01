@@ -32,11 +32,11 @@ allrecs$subject <- as.factor(allrecs$subject)
 # Descriptive activity labels
 allrecs$activity <- factor(allrecs$activity, labels=as.vector(act_lab[,2]))
 
-# We only need to select columns with Mean() and Std() only.
+# Select columns with Mean() and Std() only.
 columns <- append(grep("mean", names(allrecs), value=TRUE), grep("std", names(allrecs), value=TRUE))
 allrecs <- allrecs[, c(columns, "subject", "activity")]
 
-# Group data
+# Group data together
 groups <- melt(allrecs, id=c("subject", "activity"))
 group_means <- dcast(groups, subject + activity ~ variable, mean)
 
